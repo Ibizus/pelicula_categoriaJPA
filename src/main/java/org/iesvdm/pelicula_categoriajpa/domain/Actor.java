@@ -14,24 +14,16 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Pelicula {
+public class Actor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private long id;
 
-    private String titulo;
+    private String nombre;
+    private String apellidos;
 
-    @ManyToMany
-    private Set<Categoria> categorias = new HashSet<>();
-
-    @ManyToMany
-    private Set<Actor> actores = new HashSet<>();
-
-    @ManyToOne
-    private Idioma idioma_original;
-
-    @ManyToMany
-    private Set<Idioma> idiomas = new HashSet<>();
+    @ManyToMany(mappedBy = "actores")
+    private Set<Pelicula> peliculas = new HashSet<>();
 }
