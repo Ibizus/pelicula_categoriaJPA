@@ -23,7 +23,7 @@ public class Pelicula {
 
     private String titulo;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Categoria> categorias = new HashSet<>();
 
     @ManyToMany

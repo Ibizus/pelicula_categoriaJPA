@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface idiomaRepository extends JpaRepository<Idioma, Long> {
+public interface IdiomaRepository extends JpaRepository<Idioma, Long> {
 }
