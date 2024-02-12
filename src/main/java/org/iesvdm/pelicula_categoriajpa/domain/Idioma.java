@@ -23,6 +23,6 @@ public class Idioma {
 
     private String nombre;
 
-    @OneToMany
+    @OneToMany(mappedBy = "idioma_original")
     private Set<Pelicula> peliculas = new HashSet<>();
 }

@@ -32,6 +32,4 @@ public class Pelicula {
     @ManyToOne
     private Idioma idioma_original;
 
-    @ManyToMany
-    private Set<Idioma> idiomas = new HashSet<>();
 }

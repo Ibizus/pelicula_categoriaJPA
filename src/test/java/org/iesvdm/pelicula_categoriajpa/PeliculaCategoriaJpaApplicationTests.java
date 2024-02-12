@@ -1,6 +1,7 @@
 package org.iesvdm.pelicula_categoriajpa;
 
 import org.iesvdm.pelicula_categoriajpa.domain.Categoria;
+import org.iesvdm.pelicula_categoriajpa.domain.Idioma;
 import org.iesvdm.pelicula_categoriajpa.domain.Pelicula;
 import org.iesvdm.pelicula_categoriajpa.repository.CategoriaRepository;
 import org.iesvdm.pelicula_categoriajpa.repository.PeliculaRepository;
@@ -26,7 +27,7 @@ class PeliculaCategoriaJpaApplicationTests {
     @Test
     void guardarManyToMany(){
 
-        Pelicula pelicula1 = new Pelicula(0, "pelicula1", new HashSet<>());
+        Pelicula pelicula1 = new Pelicula(0, "pelicula1", new HashSet<>(), new HashSet<>(), new Idioma());
         peliculaRepository.save(pelicula1);
 
         Categoria categoria1 = new Categoria(0, "categoria1", new HashSet<>());
