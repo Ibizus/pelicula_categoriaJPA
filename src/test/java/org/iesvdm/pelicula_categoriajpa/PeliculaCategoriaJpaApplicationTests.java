@@ -68,7 +68,4 @@ class PeliculaCategoriaJpaApplicationTests {
         categoriaRepository.save(categoria2);
     }
 
-
-
-
 }
