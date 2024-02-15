@@ -1,5 +1,6 @@
 package org.iesvdm.pelicula_categoriajpa.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,5 +25,6 @@ public class Idioma {
     private String nombre;
 
     @OneToMany(mappedBy = "idioma_original")
+    @JsonBackReference
     private Set<Pelicula> peliculas = new HashSet<>();
 }

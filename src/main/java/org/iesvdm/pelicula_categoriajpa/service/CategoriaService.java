@@ -37,6 +37,7 @@ public class CategoriaService {
 
     public void delete(Long id){
         this.categoriaRepository.findById(id).map( c -> {
+                                        c.getPeliculas().forEach(p-> p.getCategorias().remove(c));
                                                         this.categoriaRepository.delete(c);
                                                         return c;})
                 .orElseThrow(() -> new CategoriaNotFoundException(id));
