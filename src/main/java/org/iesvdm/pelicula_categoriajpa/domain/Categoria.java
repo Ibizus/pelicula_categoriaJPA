@@ -1,7 +1,9 @@
 package org.iesvdm.pelicula_categoriajpa.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +28,6 @@ public class Categoria {
     private String nombre;
 
     @ManyToMany(mappedBy = "categorias")
-    @JsonBackReference(value = "peliculas")
-    @JsonIgnore // para poder hacer el Post sin peliculas
+    @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id") // para poder hacer el Post sin peliculas
     private Set<Pelicula> peliculas = new HashSet<>();
 }
