@@ -2,15 +2,21 @@ package org.iesvdm.pelicula_categoriajpa.service;
 
 import org.iesvdm.pelicula_categoriajpa.domain.Categoria;
 import org.iesvdm.pelicula_categoriajpa.exception.CategoriaNotFoundException;
+import org.iesvdm.pelicula_categoriajpa.repository.CategoriaCustomRepositoryJPQLImpl;
 import org.iesvdm.pelicula_categoriajpa.repository.CategoriaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private CategoriaCustomRepositoryJPQLImpl categoriaCustomRepository;
 
     public CategoriaService(CategoriaRepository categoriaRepository){
         this.categoriaRepository = categoriaRepository;
@@ -19,6 +25,10 @@ public class CategoriaService {
 
     public List<Categoria> all(){
         return this.categoriaRepository.findAll();
+    }
+
+    public List<Categoria> all(Optional<String> buscar, Optional<String> ordenar){
+        return this.categoriaCustomRepository.queryCustomCategoria(buscar, ordenar);
     }
 
     public Categoria save(Categoria categoria){
@@ -42,4 +52,5 @@ public class CategoriaService {
                                                         return c;})
                 .orElseThrow(() -> new CategoriaNotFoundException(id));
     }
+
 }
