@@ -15,8 +15,9 @@ public class CategoriaDTO extends Categoria {
     // pero ensucia el modelo y empeora si necesitamos más campos (no escalable)
     private int conteoPeliculas;
 
-    public CategoriaDTO(Categoria categoria, int conteoPeliculas){
+    public CategoriaDTO(Categoria categoria){
         super(categoria.getId(), categoria.getNombre(), categoria.getPeliculas());
-        this.conteoPeliculas = conteoPeliculas;
+        // Tiene que estar en EAGER la colección para hacer esto:
+        this.conteoPeliculas = categoria.getPeliculas().size();
     }
 }

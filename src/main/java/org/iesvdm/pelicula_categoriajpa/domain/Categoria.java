@@ -24,8 +24,13 @@ public class Categoria {
 
     private String nombre;
 
-    @ManyToMany(mappedBy = "categorias")
+    @ManyToMany(mappedBy = "categorias", fetch = FetchType.EAGER)
     @JsonIdentityInfo(generator= ObjectIdGenerators.IntSequenceGenerator.class, property="@id") // para poder hacer el Post sin peliculas
     @ToString.Exclude
     private Set<Pelicula> peliculas = new HashSet<>();
+
+    // Transient se utiliza para añadir campos a la clase
+    // e ignorarlos para la persistencia, Alternativa a DTO
+//    @Transient
+//    private int conteoPeliculas;
 }
