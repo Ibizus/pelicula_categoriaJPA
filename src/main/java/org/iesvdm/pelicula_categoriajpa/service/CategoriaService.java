@@ -5,9 +5,15 @@ import org.iesvdm.pelicula_categoriajpa.exception.CategoriaNotFoundException;
 import org.iesvdm.pelicula_categoriajpa.repository.CategoriaCustomRepositoryJPQLImpl;
 import org.iesvdm.pelicula_categoriajpa.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -23,12 +29,28 @@ public class CategoriaService {
     }
 
 
-    public List<Categoria> all(){
-        return this.categoriaRepository.findAll();
-    }
+    // Este lo dejo sin uso, queda machacado por los dos siguientes:
+//    public List<Categoria> all(){
+//        return this.categoriaRepository.findAll();
+//    }
 
     public List<Categoria> all(Optional<String> buscar, Optional<String> ordenar){
         return this.categoriaCustomRepository.queryCustomCategoria(buscar, ordenar);
+    }
+
+    public Map<String, Object> all(int pagina, int tamanio){
+
+        Pageable paginado = PageRequest.of(pagina, tamanio, Sort.by("id").ascending());
+        Page<Categoria> pageAll = this.categoriaRepository.findAll(paginado);
+
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("categorias", pageAll.getContent());
+        response.put("currentpage", pageAll.getNumber());
+        response.put("totalItems", pageAll.getTotalElements());
+        response.put("totalPages", pageAll.getTotalPages());
+
+        return response;
     }
 
     public Categoria save(Categoria categoria){
