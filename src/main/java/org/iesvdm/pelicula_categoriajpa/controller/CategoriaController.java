@@ -2,6 +2,7 @@ package org.iesvdm.pelicula_categoriajpa.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.iesvdm.pelicula_categoriajpa.domain.Categoria;
+import org.iesvdm.pelicula_categoriajpa.dto.CategoriaDTO;
 import org.iesvdm.pelicula_categoriajpa.service.CategoriaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +28,11 @@ public class CategoriaController {
     // que si no lleva ningún parámetro se listen todas las categorias
     // lo dejo para ver que podemos restringir los parámetros directamente en el endpoint
 
-//    @GetMapping(value = {"","/"}, params = {"!buscar", "!ordenar"})
-//    public List<Categoria> all(){
-//        log.info("Accediendo a todas las categorías");
-//        return this.categoriaService.all();
-//    }
+    @GetMapping(value = {"","/"}, params = {"!buscar", "!ordenar", "!pagina", "!tamanio"})
+    public List<CategoriaDTO> all(){
+        log.info("Accediendo a todas las categorías");
+        return this.categoriaService.all();
+    }
 
     // METODO DE LISTADO CON FILTRO BUSCAR Y ORDENAR:
     @GetMapping(value = {"","/"}, params = {"!pagina", "!tamanio"})

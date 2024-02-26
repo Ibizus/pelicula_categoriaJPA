@@ -1,6 +1,7 @@
 package org.iesvdm.pelicula_categoriajpa.service;
 
 import org.iesvdm.pelicula_categoriajpa.domain.Categoria;
+import org.iesvdm.pelicula_categoriajpa.dto.CategoriaDTO;
 import org.iesvdm.pelicula_categoriajpa.exception.CategoriaNotFoundException;
 import org.iesvdm.pelicula_categoriajpa.repository.CategoriaCustomRepositoryJPQLImpl;
 import org.iesvdm.pelicula_categoriajpa.repository.CategoriaRepository;
@@ -29,10 +30,11 @@ public class CategoriaService {
     }
 
 
-    // Este lo dejo sin uso, queda machacado por los dos siguientes:
-//    public List<Categoria> all(){
-//        return this.categoriaRepository.findAll();
-//    }
+    // Opción con conteo de películas por categoría:
+    public List<CategoriaDTO> all(){
+
+        return this.categoriaRepository.findAll().stream().map(CategoriaDTO::new).toList();
+    }
 
     public List<Categoria> all(Optional<String> buscar, Optional<String> ordenar){
         return this.categoriaCustomRepository.queryCustomCategoria(buscar, ordenar);

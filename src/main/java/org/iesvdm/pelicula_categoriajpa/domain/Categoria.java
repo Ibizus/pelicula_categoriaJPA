@@ -30,7 +30,7 @@ public class Categoria {
     private Set<Pelicula> peliculas = new HashSet<>();
 
     // Transient se utiliza para añadir campos a la clase
-    // e ignorarlos para la persistencia, Alternativa a DTO
+    // e ignorarlos para la persistencia, Alternativa a DTO:
 //    @Transient
 //    private int conteoPeliculas;
 }
